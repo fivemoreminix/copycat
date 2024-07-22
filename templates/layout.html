@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{- with .Page.Title -}}{{.}} - {{end -}}Copycat</title>
+        <link rel="stylesheet" href="/assets/style.css" />
+    </head>
+    <body>
+        <header>
+            <div style="display: inline-block;">
+                <a id="title" href="/">Copycat</a>
+                <p id="subtitle" style="font-size: small;">The minimalist pastebin.</p>
+            </div>
+            <div id="nav-items">
+                {{/* The following is painful to read, but until a more robust solution is required, just keep it simple. */}}
+                <a href="/" class="nav-item" style="color: {{if (eq .Page.Path "/")}}var(--accent){{else}}inherit{{end}};">Upload</a>
+                <a href="/about" class="nav-item" style="margin-left: 10px; color: {{if (eq .Page.Path "/about")}}var(--accent){{else}}inherit{{end}};">About</a>
+            </div>
+        </header>
+        <main>
+            {{ block "body" . }}{{ end }}
+        </main>
+        {{ block "script" . }}{{ end }}
+    </body>
+</html>

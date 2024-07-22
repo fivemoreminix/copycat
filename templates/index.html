@@ -1,0 +1,101 @@
+{{ template "layout.html" . }}
+
+{{ define "script" }}
+<script>
+    const form = document.getElementById("form");
+    const filesContainer = document.getElementById("files-container");
+
+    async function submit() {
+        // We use a multipart formdata encoding to transfer files.
+        const formData = new FormData();
+
+        // Collect File blobs from the file pickers.
+        const pickers = filesContainer.getElementsByClassName("file-picker");
+        for (let i = 0; i < pickers.length; i++) {
+            const fileInput = pickers[i].getElementsByTagName("input")[0];
+            if (fileInput.files.length < 1) {
+                continue;
+            }
+            formData.append("files", fileInput.files[0]);
+        }
+
+        // Get the plaintext content and trim leading and trailing whitespace.
+        const body = document.getElementById("body").value.trim();
+        formData.append("body", body);
+
+        // User must input text or add a file to upload.
+        if (body.length === 0 && formData.getAll("files").length === 0) return;
+
+        // Make the request to the API endpoint.
+        fetch("/submit", {
+            method: "POST",
+            body: formData,
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Request failed, status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((json) => {
+                if (!("redirect" in json)) {
+                    throw new Error("The upload failed. This is an internal problem, so please make a report!");
+                }
+                console.log(json);
+                window.location.href = json.redirect;
+            })
+            .catch((error) => {
+                console.error(error.message);
+                alert(error.message);
+            })
+
+        return false;
+    }
+
+    function addFilePicker() {
+        const filePicker = document.createElement("div");
+        filePicker.className = "file-picker";
+        filePicker.style = "display: block;";
+
+        const fileInput = document.createElement("input");
+        fileInput.type = "file";
+
+        const removeButton = document.createElement("button");
+        removeButton.type = "button" // <button> elements need type="button" to prevent form submit.
+        removeButton.innerHTML = "Remove";
+        removeButton.addEventListener("click", (button, ev) => {
+            filePicker.remove();
+        });
+
+        filesContainer.appendChild(filePicker);
+        filePicker.appendChild(fileInput);
+        filePicker.appendChild(removeButton);
+    }
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        submit();
+    });
+
+    // Add file input fields when the "Add file" button is pressed.
+    document.getElementById("add-file-button").addEventListener("click", (_, event) => {
+        addFilePicker();
+    })
+
+    addFilePicker(); // Have one file picker on page load.
+</script>
+{{ end }}
+
+{{ define "body" }}
+
+<form id="form">
+    <label for="body">Plaintext content:</label>
+    <textarea id="body" name="body" rows="10" cols="30" style="margin-bottom: 10px;"></textarea>
+    <label>Upload files:</label>
+    <div id="files-container" style="display: block;"></div>
+    <button type="button" id="add-file-button" style="display: block;">Add file</button>
+    <p style="font-size: small;">Total maximum file upload size: 32 MiB</p>
+    <input id="submit" type="submit" value="Upload" />
+</form>
+
+{{ end }}

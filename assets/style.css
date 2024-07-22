@@ -1,0 +1,85 @@
+:root {
+    --accent: indigo;
+}
+
+/* || GENERAL STYLES */
+
+body {
+    font-family: monospace;
+    background-color: whitesmoke;
+    color: rgb(16, 0, 28);
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:any-link {
+    color: var(--accent);
+}
+
+main {
+    margin: 10px;
+}
+
+/* || FORMS */
+
+form textarea {
+    display: block;
+    font-family: monospace;
+    font-size: 1.1em;
+}
+
+input[type=submit] {
+    margin-top: 10px;
+    padding: 7px 12px;
+    border: 1px solid gray;
+    border-radius: 6px;
+    background-color: whitesmoke;
+    font-size: small;
+    box-shadow: 4px 4px 5px -5px black;
+}
+
+input[type=submit]:hover {
+    background-color: lightgray;
+}
+
+input[type=submit]:active {
+    background-color: darkgray;
+    /* color: whitesmoke; */
+}
+
+/* || HEADER / TITLE / NAV */
+
+header {
+    display: flex;
+    align-items: center;
+    background-color: lightgray;
+    padding: 5px 10px;
+    border-bottom: 1px solid gray;
+}
+
+#title {
+    display: inline-block;
+    font-size: large;
+    text-align: center;
+    width: 100%;
+    color: var(--accent);
+}
+
+#subtitle {
+    margin: 0px;
+}
+
+#nav-items {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.nav-item {
+    font-size: 1.1em;
+}

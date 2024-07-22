@@ -1,0 +1,18 @@
+{{ template "layout.html" . }}
+
+{{ define "body" }}
+
+<pre>{{ .Upload.Body }}</pre>
+{{ if .Upload.FileNames }}
+<p style="font-size: small;">Attachments:</p>
+<ol>
+    {{ range $i, $name := .Upload.FileNames }}
+    <li>
+        <a href={{ printf "/download?hash=%s" (index $.Upload.FileHashes $i) }}>{{ $name }}</a>
+    </li>
+    {{ end }}
+</ol>
+{{ end }}
+<p style="font-size: smaller;">{{ .Upload.Timestamp | datestring }}</p>
+
+{{ end }}
