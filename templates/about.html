@@ -2,6 +2,38 @@
 
 {{ define "body" }}
 
-<p>Example about page.</p>
+<h1>About</h1>
+<p>
+    A simple pastebin-like website, where users may anonymously upload plaintext and file attachments up to 35 MiB in total, 
+    and share the shortened links with others.
+</p>
+<p>
+    Copycat was made by Luke Wilson in one week, with about 18 hours in development.
+</p>
+<p>
+    The application utilizes common Amazon Web Services:
+</p>
+<ol>
+    <li><strong>RDS PostgreSQL</strong> - Relational Database Service.</li>
+    <li><strong>S3</strong> - Simple Storage Service for storing file attachments.</li>
+    <li><strong>EC2</strong> - Elastic Cloud Compute runs the webserver written in Go.</li>
+    <li><strong>Elastic Beanstalk</strong> - For managing the EC2 clusters and load balancer.</li>
+    <li><strong>Load Balancer</strong> - Distributes network traffic between EC2 clusters for scaling.</li>
+    <li><strong>VPC</strong> - Virtual Private Cloud for containerizing network services and restricting access.</li>
+    <li><strong>IAM</strong> - Access management and service permissions.</li>
+</ol>
+
+<p>In addition, the application uses:</p>
+<ol>
+    <li><strong>Go</strong> programming language for backend.</li>
+    <li><strong>JavaScript</strong>, <strong>HTML</strong>, and <strong>CSS</strong> for frontend.</li>
+    <li><strong>Gin</strong> web framework for routing and network requests.</li>
+    <li><strong>GitHub</strong> and <strong>Git</strong> for source control.</li>
+    <li><strong>AWS SDK</strong> for Go to access the S3 bucket.</li>
+    <li><strong>SHA-1</strong> hash algorithm for generating unique object IDs.</li>
+</ol>
+
+<h2>Motivation</h2>
+<p>To improve my web development skills, and to provide proof that I am capable of full-stack development, DevOps, security, and general software engineering.</p>
 
 {{ end }}
