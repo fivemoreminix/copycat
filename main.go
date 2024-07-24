@@ -20,8 +20,6 @@ import (
 
 const maxUploadSize = 32 * 1024 * 1024 // 32 MiB maximum attachments upload size.
 
-var baseurl = os.Getenv("BASEURL")
-
 // PageInfo is passed to templates as "Page" to provide context.
 type PageInfo struct {
 	Title string
@@ -34,6 +32,12 @@ func NewPageInfo(c *gin.Context, title string) *PageInfo {
 }
 
 func main() {
+	// The .env file is loaded in the init() of db.go
+	var baseurl = os.Getenv("BASEURL")
+	if baseurl == "" {
+		log.Fatal("GOBASEURL environment variable has not been assigned")
+	}
+
 	r := gin.Default()
 	r.MaxMultipartMemory = maxUploadSize
 

@@ -1,2 +1,2 @@
-# Dotenv (server configuration variables)
-.env
+/bin
+*.zip
