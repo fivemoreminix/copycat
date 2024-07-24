@@ -1,5 +1,7 @@
 :root {
-    --accent: indigo;
+    --accent: rgb(75, 0, 130);
+    --accentDarker: rgb(50, 0, 85);
+    --accentDarkest: rgb(33, 0, 57);
 }
 
 /* || GENERAL STYLES */
@@ -7,7 +9,11 @@
 body {
     font-family: monospace;
     background-color: whitesmoke;
-    color: rgb(16, 0, 28);
+    color: var(--accentDarkest);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--accent);
 }
 
 a {
@@ -23,7 +29,8 @@ a:any-link {
 }
 
 main {
-    margin: 10px;
+    margin: 20px;
+    max-width: 750px;
 }
 
 /* || FORMS */
@@ -39,18 +46,18 @@ input[type=submit] {
     padding: 7px 12px;
     border: 1px solid gray;
     border-radius: 6px;
-    background-color: whitesmoke;
+    color: whitesmoke;
+    background-color: var(--accent);
+    font-family: inherit;
     font-size: small;
-    box-shadow: 4px 4px 5px -5px black;
 }
 
 input[type=submit]:hover {
-    background-color: lightgray;
+    background-color: var(--accentDarker);
 }
 
 input[type=submit]:active {
-    background-color: darkgray;
-    /* color: whitesmoke; */
+    background-color: var(--accentDarkest);
 }
 
 /* || HEADER / TITLE / NAV */
