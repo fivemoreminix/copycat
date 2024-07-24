@@ -3,6 +3,7 @@
 {{ define "script" }}
 <script>
     const form = document.getElementById("form");
+    const textArea = document.getElementById("body");
     const filesContainer = document.getElementById("files-container");
 
     async function submit() {
@@ -20,7 +21,7 @@
         }
 
         // Get the plaintext content and trim leading and trailing whitespace.
-        const body = document.getElementById("body").value.trim();
+        const body = textArea.value.trim();
         formData.append("body", body);
 
         // User must input text or add a file to upload.
@@ -31,13 +32,12 @@
             method: "POST",
             body: formData,
         })
-            .then((response) => {
+            .then(async (response) => {
                 if (!response.ok) {
                     throw new Error(`Request failed, status: ${response.status}`);
                 }
-                return response.json();
-            })
-            .then((json) => {
+
+                let json = await response.json();
                 if (!("redirect" in json)) {
                     throw new Error("The upload failed. This is an internal problem, so please make a report!");
                 }
@@ -51,6 +51,13 @@
 
         return false;
     }
+
+    document.onkeydown = function(e) {
+        // Submit the form when pressing Enter only if the text area is not focused.
+        if (document.activeElement !== textArea && e.keyCode === 13) {
+            submit();
+        }
+    };
 
     function addFilePicker() {
         const filePicker = document.createElement("div");
