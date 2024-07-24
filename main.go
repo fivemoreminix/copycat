@@ -31,6 +31,12 @@ func NewPageInfo(c *gin.Context, title string) *PageInfo {
 	return &PageInfo{Title: title, Path: c.FullPath()}
 }
 
+func init() {
+	// Gin checks this environment variable before we can load it from the .env
+	var mode = os.Getenv("GIN_MODE")
+	gin.SetMode(mode)
+}
+
 func main() {
 	// The .env file is loaded in the init() of db.go
 	var baseurl = os.Getenv("BASEURL")
