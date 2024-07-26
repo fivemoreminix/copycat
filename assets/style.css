@@ -10,6 +10,7 @@ body {
     font-family: monospace;
     background-color: whitesmoke;
     color: var(--accentDarkest);
+    font-size: 22px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -38,18 +39,26 @@ main {
 form textarea {
     display: block;
     font-family: monospace;
-    font-size: 1.1em;
+    font-size: 26px;
+}
+
+#files-container {
+    margin-top: 20px;
+}
+
+#files-container input, #files-container button {
+    font-size: 20px;
 }
 
 input[type=submit] {
     margin-top: 10px;
-    padding: 7px 12px;
+    padding: 10px 16px;
     border: 1px solid gray;
     border-radius: 6px;
     color: whitesmoke;
     background-color: var(--accent);
     font-family: inherit;
-    font-size: small;
+    font-size: 22px;
 }
 
 input[type=submit]:hover {
@@ -58,6 +67,11 @@ input[type=submit]:hover {
 
 input[type=submit]:active {
     background-color: var(--accentDarkest);
+}
+
+#add-file-button {
+    margin-top: 20px;
+    font-size: 1em;
 }
 
 /* || HEADER / TITLE / NAV */
@@ -72,7 +86,7 @@ header {
 
 #title {
     display: inline-block;
-    font-size: large;
+    font-size: 24px;
     text-align: center;
     width: 100%;
     color: var(--accent);
@@ -80,13 +94,11 @@ header {
 
 #subtitle {
     margin: 0px;
+    font-size: 18px;
 }
 
 #nav-items {
     display: inline-block;
-    margin-left: 20px;
-}
-
-.nav-item {
-    font-size: 1.1em;
+    margin-left: 35px;
+    font-size: 20px;
 }
